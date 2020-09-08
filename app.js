@@ -7,22 +7,18 @@ const app = express();
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(express.static("public"));
 
 mongoose.connect("mongodb://localhost:27017/apiDB",  {useNewUrlParser: true});
 
-const apiSchema ={
+const taskSchema ={
   taskName : String,
   taskDiscription : String,
   creator : String,
   duration : Number,
   created_at: { type: Date, default: Date.now },
-
-  expires : Number
-
   };
 
-const task = mongoose.model("api", apiSchema);
+const task = mongoose.model("task", taskSchema);
 
 
 
@@ -43,39 +39,30 @@ app.post("/add" , function (req , res) {
     taskName : req.body.taskName,
     taskDiscription : req.body.taskDiscription,
     creator : req.body.creator,
-
-    expires: Number(req.body.duration)
+    duration: Number(req.body.duration)
   });
   newTask.save(function (err, data) {
-    if (!err){
 
+    if (!err){
       res.send("Successfully added a new article.");
       console.log(data);
-
       let k = setTimeout(function(){
         console.log("Hello");
         task.findOneAndDelete({_id: data._id}, function(err){})
         console.log({k});
         clearTimeout(k);
 
-        }, Number(req.body.duration)*100)
+      }, Number(req.body.duration)*60000)
     }
 
     else {
       res.send(err);
     }
   });
-
-
-  // task.findOne({taskName: req.body.taskName}, function(err, foundTask){
-  //   console.log(foundTask.created_at);
-  //   //foundList.save();
-  // });
-
-
 });
 
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
 });
+
