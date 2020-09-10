@@ -2,9 +2,9 @@
 boardInfinity
 # Details
 A Node.js app using [Express](http://expressjs.com/), mongodb 
-The application is a rest api which works works as a to-do-list and have the functionality of scheduling tasks based on duration [file]().
+The application is a rest api which works works as a to-do-list and have the functionality of scheduling tasks based on duration with task automatically getting deleted when the time duration is over.
 
-The running demo of the web application is available on this [link](https://task-creator-gaurv.herokuapp.com//).
+The running demo of the web application is available on this [link](https://task-creator-gaurv.herokuapp.com/list/).
 
 ## How to run locally
 ```sh
@@ -20,7 +20,7 @@ Browse localhost 3000
 
 ## Deploying to Heroku
 
-```sh
+```
 heroku create
 git push heroku master
 heroku open
