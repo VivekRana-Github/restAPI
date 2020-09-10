@@ -17,10 +17,10 @@ npm i mongoose
 mongod (separate cmd)
 node app.js
 Browse localhost 3000
+```
 
 ## Deploying to Heroku
-
-```
+```sh
 heroku create
 git push heroku master
 heroku open
